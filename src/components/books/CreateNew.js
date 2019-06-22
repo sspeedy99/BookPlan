@@ -53,5 +53,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
+//the first argument of the connect HOC is mapStateToProps which is null here.
 export default connect(null,mapDispatchToProps)(CreateNew)
 
