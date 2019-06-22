@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { createBook } from '../../store/actions/bookAction';
+import {connect} from 'react-redux';
 
 class CreateNew extends Component {
     state= {
@@ -16,7 +18,9 @@ class CreateNew extends Component {
     // finction to fire onSubmit event handler
       handleSubmit = (e) => {
         e.preventDefault(); //stop the refreshing of the page
-        console.log(this.state);
+        //passing our newly created project to the action creater 
+        this.props.createBook(this.state);
+
       }
       
 
@@ -42,5 +46,12 @@ class CreateNew extends Component {
     }
 }
 
-export default CreateNew
+//Mapping our disptached data to the props of the componenet
+const mapDispatchToProps = dispatch => {
+  return {
+    createBook: (book) => dispatch(createBook(book))
+  }
+}
+
+export default connect(null,mapDispatchToProps)(CreateNew)
 
