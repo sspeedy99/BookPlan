@@ -8,14 +8,18 @@ const initState = {
 
 
 const bookReducer = (state = initState, action) => {
-    // eslint-disable-next-line default-case
     switch(action.type)
     {
         //checking if the action type of the dispatch is create a new book, if yes then log it to the console
         case 'CREATE_BOOK':
-        console.log('created a new book', action.book);
+            console.log('created a new book', action.book);
+            return state;
+        case 'CREATE_BOOK_ERROR':
+            console.log('create book error', action.err)
+            return state;
+        default:
+            return state;
     }   
-    return state
 }
 
 export default bookReducer

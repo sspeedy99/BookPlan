@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Notification from './Notifications';
 import BookList from '../books/BookList';
 import {connect} from 'react-redux';
+import { firestoreConnect } from 'react-redux-firebase';
+import { compose } from 'redux';
 
 class Dashboard extends Component {
     render() {
@@ -29,10 +31,17 @@ class Dashboard extends Component {
 //getting data from reducer and pass it to state.
 //mapping our state to props
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
-        books:state.book.books// reading from book property of the root reducer
+        books:state.firestore.ordered.books // reading from firestore property of the root reducer
     }
 }
 
 //connect component to the reduer.
-export default connect(mapStateToProps)(Dashboard);
+//connecting the dashboard component to the the books collection of the firestore database
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([ 
+        { collection:'books' }
+    ])
+)(Dashboard);
