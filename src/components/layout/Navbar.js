@@ -3,6 +3,8 @@ import React from 'react';
 import { Link } from 'react-router-dom'
 import SignedInLinks from './SignInLink';
 import SignedOutLinks from './SignOutLink';
+import { connect } from 'react-redux';
+
 const Navbar = (props) => {
   return (
     //Materialize CSS Wrapper with nav
@@ -16,4 +18,13 @@ const Navbar = (props) => {
     </nav>
   )
 }
-export default Navbar;
+
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+      auth:state.firebase.auth // reading from firestore property of the root reducer
+  }
+}
+
+
+export default connect(mapStateToProps)(Navbar);

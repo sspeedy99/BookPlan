@@ -8,7 +8,7 @@ const BookList = ({books}) => {
             {books && books.map(book => {
                 return (
                     //passing each book into BookSummary.
-                    <Link to ={'/books/'+ book.id}  > <BookSummary book={book} key = {book.id}/> </Link>
+                    <Link to ={'/books/'+ book.id} key = {book.id}  > <BookSummary book={book} /> </Link>
                 )
             })}
         </div>

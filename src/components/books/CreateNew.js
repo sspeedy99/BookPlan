@@ -34,7 +34,7 @@ class CreateNew extends Component {
                       <input type="text" id="title" onChange={this.handleChange}/>
                   </div>
                   <div className ="input-field" >
-                      <label htmlFor="content">Book Summery</label>
+                      <label htmlFor="content">What inspired you to start this ?</label>
                       <input type="text" id="content" onChange={this.handleChange}/>
                   </div>
                   <div className="input-field">
