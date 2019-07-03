@@ -4,12 +4,14 @@ import BookList from '../books/BookList';
 import {connect} from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
     render() {
         //console.log(this.props)
         //capturing books property from the props
-        const { books } = this.props;
+        const { books, auth } = this.props;
+        if(!auth.uid) return <Redirect to='/signin'/>
         return (
            <div className='dashboard container'>
                <div className="row">
@@ -33,7 +35,9 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     console.log(state)
     return {
-        books:state.firestore.ordered.books // reading from firestore property of the root reducer
+        books:state.firestore.ordered.books,
+        auth:state.firebase.auth
+        // reading from firestore property of the root reducer
     }
 }
 

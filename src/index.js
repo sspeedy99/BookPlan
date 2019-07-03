@@ -18,14 +18,18 @@ const store =  createStore(rootReducer,
     compose(
         applyMiddleware(thunk.withExtraArgument({getFirebase,getFirestore})),
         reduxFirestore(firebaseConfig),
-        reactReduxFirebase(firebaseConfig)
+        //allow auth is ready. see documentation.
+        reactReduxFirebase(firebaseConfig, {attachAuthIsReady:true})
     )
     );
 
+//We will wait till firebase figures out that the authentication is ready.
+store.firebaseAuthIsReady.then(()=>{
+    ReactDOM.render(<Provider store = {store}><App /></Provider>, document.getElementById('root'));
 
-ReactDOM.render(<Provider store = {store}><App /></Provider>, document.getElementById('root'));
+    // If you want your app to work offline and load faster, you can change
+    // unregister() to register() below. Note this comes with some pitfalls.
+    // Learn more about service workers: https://bit.ly/CRA-PWA
+    serviceWorker.register();
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.register();
+})
