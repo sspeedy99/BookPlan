@@ -1,5 +1,3 @@
-import { get } from "https";
-
 //Action creater for the authentication method
 export const signIn = (credentials) => {
     return (dispatch, getState, {getFirebase}) => {
