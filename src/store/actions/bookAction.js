@@ -7,13 +7,15 @@ export const createBook = (book) => {
       // make async call to database
       //configuring our database to the reducer
       const firestore = getFirestore();
+      const profile = getState().firebase.profile;
+      const authorId = getState().firebase.auth.uid
       //adding  documenets into books collection of the firestore database
       firestore.collection('books').add({
         //spreadin the project to get its methode
         ...book,
-        authorFirstName:'Shashi',
-        authorLastName:'Singh',
-        authorId:12345,
+        authorFirstName:profile.firstName,
+        authorLastName:profile.lastName,
+        authorId:authorId,
         cretedAt: new Date()
 
       }).then(()=>{ // adding to the firestore database is async request, so it will return a promise. when the promise is returned then the dispatch action is fired.

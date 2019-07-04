@@ -20,6 +20,8 @@ class CreateNew extends Component {
         e.preventDefault(); //stop the refreshing of the page
         //passing our newly created project to the action creater 
         this.props.createBook(this.state);
+        this.props.history.push('/');
+        console.log(this.props)
 
       }
       
