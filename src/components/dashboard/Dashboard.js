@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Notification from './Notifications';
+import Notifications from './Notifications';
 import BookList from '../books/BookList';
 import {connect} from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
@@ -10,7 +10,7 @@ class Dashboard extends Component {
     render() {
         //console.log(this.props)
         //capturing books property from the props
-        const { books, auth } = this.props;
+        const { books, auth, notifications } = this.props;
         if(!auth.uid) return <Redirect to='/signin'/>
         return (
            <div className='dashboard container'>
@@ -22,7 +22,7 @@ class Dashboard extends Component {
                     </div>
                    {/*Div for the Feeds list */}
                    <div className="col s12 m5 offset-m1">
-                       <Notification/>
+                       <Notifications notifications={notifications}/>
                     </div>
                </div>
            </div> 
@@ -35,7 +35,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
     return {
         books:state.firestore.ordered.books,
-        auth:state.firebase.auth
+        auth:state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
         // reading from firestore property of the root reducer
     }
 }
@@ -45,6 +46,7 @@ const mapStateToProps = (state) => {
 export default compose(
     connect(mapStateToProps),
     firestoreConnect([ 
-        { collection:'books' }
+        { collection:'books' },
+        { collection:'notifications', limit:3  }
     ])
 )(Dashboard);
