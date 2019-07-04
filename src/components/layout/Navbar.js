@@ -6,11 +6,11 @@ import SignedOutLinks from './SignOutLink';
 import { connect } from 'react-redux';
 
 const Navbar = (props) => {
-    const {auth} = props
+    const {auth,profile} = props
     //Checkin if the user is signed in or not
     //if the user is signed in then show SignedLinks or SignedOut
     //If the user is signed in then the uid will not be null
-    const links = auth.uid ? <SignedInLinks /> : <SignedOutLinks />;
+    const links = auth.uid ? <SignedInLinks profile={profile} /> : <SignedOutLinks />;
   return (
     //Materialize CSS Wrapper with nav
     <nav className="nav-wrapper grey darken-4">
@@ -24,9 +24,9 @@ const Navbar = (props) => {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
-      auth:state.firebase.auth // reading from firestore property of the root reducer
+      auth:state.firebase.auth, // reading from firestore property of the root reducer
+      profile: state.firebase.profile
   }
 }
 

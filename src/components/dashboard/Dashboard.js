@@ -33,7 +33,6 @@ class Dashboard extends Component {
 //getting data from reducer and pass it to state.
 //mapping our state to props
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         books:state.firestore.ordered.books,
         auth:state.firebase.auth
