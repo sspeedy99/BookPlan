@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import moment from 'moment';
 
 const BookDetails = (props) => {
     const { book } = props;
@@ -15,7 +16,7 @@ const BookDetails = (props) => {
                </div>
                <div className="card-action grey lighten-4 grey-text">
                    <div>Posted by {book.authorFirstName} {book.authorLastName}</div>
-                   <div>2nd, September, 2am</div>
+                   <div>{moment(book.cretedAt.toDate()).format('MMMM Do YYYY, h:mm:ss a')}</div>
                </div>
             </div> 
         </div>
